@@ -1,0 +1,11 @@
+/Users/xuanhung/RiderProjects/SpringHeroBank/SpringHeroBank/bin/Debug/netcoreapp2.0/SpringHeroBank.deps.json
+/Users/xuanhung/RiderProjects/SpringHeroBank/SpringHeroBank/bin/Debug/netcoreapp2.0/SpringHeroBank.runtimeconfig.json
+/Users/xuanhung/RiderProjects/SpringHeroBank/SpringHeroBank/bin/Debug/netcoreapp2.0/SpringHeroBank.runtimeconfig.dev.json
+/Users/xuanhung/RiderProjects/SpringHeroBank/SpringHeroBank/bin/Debug/netcoreapp2.0/SpringHeroBank.dll
+/Users/xuanhung/RiderProjects/SpringHeroBank/SpringHeroBank/bin/Debug/netcoreapp2.0/SpringHeroBank.pdb
+/Users/xuanhung/RiderProjects/SpringHeroBank/SpringHeroBank/obj/Debug/netcoreapp2.0/SpringHeroBank.csprojAssemblyReference.cache
+/Users/xuanhung/RiderProjects/SpringHeroBank/SpringHeroBank/obj/Debug/netcoreapp2.0/SpringHeroBank.csproj.CoreCompileInputs.cache
+/Users/xuanhung/RiderProjects/SpringHeroBank/SpringHeroBank/obj/Debug/netcoreapp2.0/SpringHeroBank.AssemblyInfoInputs.cache
+/Users/xuanhung/RiderProjects/SpringHeroBank/SpringHeroBank/obj/Debug/netcoreapp2.0/SpringHeroBank.AssemblyInfo.cs
+/Users/xuanhung/RiderProjects/SpringHeroBank/SpringHeroBank/obj/Debug/netcoreapp2.0/SpringHeroBank.dll
+/Users/xuanhung/RiderProjects/SpringHeroBank/SpringHeroBank/obj/Debug/netcoreapp2.0/SpringHeroBank.pdb
