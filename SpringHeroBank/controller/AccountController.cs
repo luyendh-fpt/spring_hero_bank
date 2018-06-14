@@ -1,6 +1,7 @@
 ﻿using System;
 using SpringHeroBank.entity;
 using SpringHeroBank.model;
+using SpringHeroBank.utility;
 
 namespace SpringHeroBank.controller
 {
@@ -31,20 +32,105 @@ namespace SpringHeroBank.controller
             if (errors.Count == 0)
             {
                 model.Save(account);
+                Console.WriteLine("Register success!");
+                Console.ReadLine();
             }
             else
-            {                
-                Console.Error.WriteLine("Please fix following errors and try again.");                                
+            {
+                Console.Error.WriteLine("Please fix following errors and try again.");
                 foreach (var messagErrorsValue in errors.Values)
                 {
                     Console.Error.WriteLine(messagErrorsValue);
                 }
+
                 Console.ReadLine();
             }
         }
 
-        public void DoLogin()
+        public Boolean DoLogin()
         {
+            // Lấy thông tin đăng nhập phía người dùng.
+            Console.WriteLine("Please enter account information");
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("Username: ");
+            var username = Console.ReadLine();
+            Console.WriteLine("Password: ");
+            var password = Console.ReadLine();
+            var account = new Account(username, password);
+            // Tiến hành validate thông tin đăng nhập. Kiểm tra username, password khác null và length lớn hơn 0.
+            var errors = account.ValidLoginInformation();
+            if (errors.Count > 0)
+            {
+                Console.WriteLine("Invalid login information. Please fix errors below.");
+                foreach (var messagErrorsValue in errors.Values)
+                {
+                    Console.Error.WriteLine(messagErrorsValue);
+                }
+
+                Console.ReadLine();
+                return false;
+            }
+
+            account = model.GetAccountByUserName(username);
+            if (account == null)
+            {
+                // Sai thông tin username, trả về thông báo lỗi không cụ thể.
+                Console.WriteLine("Invalid login information. Please try again.");
+                return false;
+            }
+
+            // Băm password người dùng nhập vào kèm muối và so sánh với password đã mã hoá ở trong database.
+            if (account.Password != Hash.GenerateSaltedSHA1(password, account.Salt))
+            {
+                // Sai thông tin password, trả về thông báo lỗi không cụ thể.
+                Console.WriteLine("Invalid login information. Please try again.");
+                return false;
+            }
+
+            // Login thành công. Lưu thông tin đăng nhập ra biến static trong lớp Program.
+            Program.currentLoggedIn = account;
+            return true;
+        }
+
+        public void Withdraw()
+        {
+        }
+
+        public void Deposit()
+        {
+            Console.WriteLine("Deposit.");
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine("Please enter amount to deposit: ");
+            var amount = Utility.GetUnsignDecimalNumber();
+//            Program.currentLoggedIn = model.GetAccountByUserName(Program.currentLoggedIn.Username);
+            if (model.UpdateBalance(Program.currentLoggedIn, amount, Transaction.TransactionType.DEPOSIT))
+            {
+                Console.WriteLine("Transaction success!");
+            }
+            else
+            {
+                Console.WriteLine("Transaction fails, please try again!");
+            }
+
+            Console.WriteLine("Current balance: " + Program.currentLoggedIn.Balance);
+            Console.WriteLine("Press enter to continue!");
+            Console.ReadLine();
+        }
+
+        public void Transfer()
+        {
+        }
+
+        public void CheckBalance() // Dịch bởi Phúc.
+        {
+            Program.currentLoggedIn = model.GetAccountByUserName(Program.currentLoggedIn.Username);
+            Console.WriteLine("Account Information");
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine("Full name: " + Program.currentLoggedIn.FullName);
+            Console.WriteLine("Account number: " + Program.currentLoggedIn.AccountNumber);
+            Console.WriteLine("Balance: " + Program.currentLoggedIn.Balance);
+            Console.WriteLine("Press enter to continue!");
+            Console.ReadLine();
         }
     }
 }

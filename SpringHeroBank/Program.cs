@@ -9,21 +9,11 @@ namespace SpringHeroBank
 {
     class Program
     {
+        public static Account currentLoggedIn;
+        
         static void Main(string[] args)
         {
-            MainView.GenerateMenu();
-
-            // HashMap
-//            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-//            
-//            dictionary.Add("username", "Username can not be null or empty.");
-//            dictionary.Add("password", "Password is too weak.");
-//            
-//            Console.WriteLine(dictionary.Count);
-//            if (dictionary.ContainsKey("username"))
-//            {
-//                Console.WriteLine(dictionary["username"]);
-//            }
+            MainView.GenerateMenu();           
         }
     }
 }
