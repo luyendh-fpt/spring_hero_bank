@@ -102,8 +102,20 @@ namespace SpringHeroBank.controller
             Console.WriteLine("---------------------------------");
             Console.WriteLine("Please enter amount to deposit: ");
             var amount = Utility.GetUnsignDecimalNumber();
+            Console.WriteLine("Please enter message content: ");
+            var content = Console.ReadLine();
 //            Program.currentLoggedIn = model.GetAccountByUserName(Program.currentLoggedIn.Username);
-            if (model.UpdateBalance(Program.currentLoggedIn, amount, Transaction.TransactionType.DEPOSIT))
+            var historyTransaction = new Transaction
+            {
+                Id = Guid.NewGuid().ToString(),
+                Type = Transaction.TransactionType.DEPOSIT,
+                Amount = amount,
+                Content = content,
+                SenderAccountNumber = Program.currentLoggedIn.AccountNumber,
+                ReceiverAccountNumber = Program.currentLoggedIn.AccountNumber,
+                Status = Transaction.ActiveStatus.DONE
+            };
+            if (model.UpdateBalance(Program.currentLoggedIn, historyTransaction))
             {
                 Console.WriteLine("Transaction success!");
             }
@@ -111,7 +123,7 @@ namespace SpringHeroBank.controller
             {
                 Console.WriteLine("Transaction fails, please try again!");
             }
-
+            Program.currentLoggedIn = model.GetAccountByUserName(Program.currentLoggedIn.Username);
             Console.WriteLine("Current balance: " + Program.currentLoggedIn.Balance);
             Console.WriteLine("Press enter to continue!");
             Console.ReadLine();
