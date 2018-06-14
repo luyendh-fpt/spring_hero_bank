@@ -31,6 +31,12 @@ namespace SpringHeroBank.entity
             this._accountNumber = Guid.NewGuid().ToString();
         }
 
+        public Account(string username, string password)
+        {
+            _username = username;
+            _password = password;
+        }
+
         public Account(string username, string password, string confirmPassword, string identityCard, string phone,
             string email, string fullName)
         {
@@ -165,6 +171,20 @@ namespace SpringHeroBank.entity
                 errors.Add("password", "Confirm password does not match.");
             }
 
+            return errors;
+        }
+        
+        public Dictionary<string, string> ValidLoginInformation()
+        {
+            var errors = new Dictionary<string, string>();
+            if (string.IsNullOrEmpty(this._username))
+            {
+                errors.Add("username", "Username can not be null or empty.");
+            }            
+            if (string.IsNullOrEmpty(this._password))
+            {
+                errors.Add("password", "Password can not be null or empty.");
+            }           
             return errors;
         }
     }
